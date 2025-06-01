@@ -250,8 +250,8 @@ function type_editor_css() {
 	// Accent Color
 	if ( ! empty( $accent_color ) ) {
 		$editor_css .= "
-		.editor-styles-wrapper .wp-block a,
-		.editor-styles-wrapper .wp-block a:hover,
+		.editor-styles-wrapper :where(.wp-block a),
+		.editor-styles-wrapper :where(.wp-block a:hover),
 		.wp-block-freeform.block-library-rich-text__tinymce a,
 		.wp-block-freeform.block-library-rich-text__tinymce a:hover {
 		color: {$accent_color};}

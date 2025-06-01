@@ -9,6 +9,14 @@
  */
 
 
+/**
+* Make theme available for translation.
+*/
+add_action( 'init', function() {
+	load_theme_textdomain( 'type', get_template_directory() . '/languages');
+} );
+
+
 if ( ! function_exists( 'type_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -18,9 +26,6 @@ if ( ! function_exists( 'type_setup' ) ) :
  * as indicating support for post thumbnails.
  */
 function type_setup() {
-
-	// Make theme available for translation. Translations can be filed in the /languages/ directory
-	load_theme_textdomain( 'type', get_template_directory() . '/languages' );
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -81,33 +86,6 @@ function type_setup() {
 
 	// Load regular editor styles into the new block-based editor.
 	add_theme_support( 'editor-styles' );
-
-	// Add custom editor font sizes.
-	add_theme_support(
-		'editor-font-sizes',
-		array(
-			array(
-				'name'      => __( 'Small', 'type' ),
-				'size'      => 16,
-				'slug'      => 'small',
-			),
-			array(
-				'name'      => __( 'Normal', 'type' ),
-				'size'      => 18,
-				'slug'      => 'normal',
-			),
-			array(
-				'name'      => __( 'Large', 'type' ),
-				'size'      => 24,
-				'slug'      => 'large',
-			),
-			array(
-				'name'      => __( 'Huge', 'type' ),
-				'size'      => 32,
-				'slug'      => 'huge',
-			),
-		)
-	);
 
 	// Add support for custom color scheme.
 	add_theme_support( 'editor-color-palette', array(
@@ -742,46 +720,50 @@ function type_credits() {
 
 
 /**
- * Add About page class
- */
-require_once get_template_directory() . '/inc/about-page/class-type-about-page.php';
-
-
-/*
-* Add About page instance
-*/
-$my_theme = wp_get_theme();
-if ( is_child_theme() ) {
-	$my_theme_name = $my_theme->parent()->get( 'Name' );
-	$my_theme_slug = $my_theme->parent()->get_template();
-} else {
-	$my_theme_name = $my_theme->get( 'Name' );
-	$my_theme_slug = $my_theme->get_template();
-}
-
-$config = array(
-	// Pro Theme Name
-	'theme_pro_name'  => $my_theme_name . ' Plus',
-	// Pro Theme slug
-	'theme_pro_slug'  => $my_theme_slug . '-plus',
-	// Main welcome title
-	'welcome_title'   => sprintf( __( 'Welcome to %s!', 'type' ), $my_theme_name ),
-	// Main welcome sub title
-	'welcome_content' => sprintf( __( 'You have successfully installed the %s WordPress theme.', 'type' ), $my_theme_name ),
-	// Notification
-	'notification'    => '<h2 class="welcome-title">' . sprintf( __( 'Welcome! Thank you for choosing %s', 'type' ), $my_theme_name ) . '</h2><p>To fully take advantage of the best our theme can offer please visit our Welcome Page.</p><p><a href="' . esc_url( admin_url( 'themes.php?page=' . $my_theme_slug . '-welcome' ) ) . '" class="button button-primary">' . sprintf( __( 'Get started with %s', 'type' ), $my_theme_name ) . '</a></p>',
-	// Tabs
-	'tabs'            => array(
-		'getting_started' => __( 'Getting Started', 'type' ),
-		'free_pro'        => __( 'Free vs Pro', 'type' ),
-	),
-	'utm'             => '?utm_source=WordPress&utm_medium=about_page&utm_campaign=' . $my_theme_slug . '_upsell',
-);
-Type_About_Page::init( $config );
-
-
-/**
  * Add Upsell "pro" link to the customizer
  *
  */
 require_once( trailingslashit( get_template_directory() ) . '/inc/customize-pro/class-customize.php' );
+
+
+/**
+ * Add About Page
+ */
+require_once get_template_directory() . '/inc/about-page/about-type.php';
+
+
+/**
+ * Add Upsell notice
+ */
+function type_notice() {
+	$user_id = get_current_user_id();
+	if ( ! get_user_meta( $user_id, 'type_notice_dismissed' ) ) {
+	?>
+	<div class="updated notice notice-success is-dismissible type-admin-notice">
+		<h2 class="welcome-title">
+			<?php esc_html_e( 'Welcome! Thank you for choosing Type WordPress Theme', 'type' ); ?>
+		</h2>
+		<p>
+			<?php echo wp_kses_post( __( '<strong>To fully take advantage</strong> of the best our theme can offer, please visit our', 'type' ) ); ?> <a href="<?php echo esc_url( admin_url( 'themes.php?page=about_type' ) ); ?>"><strong><?php echo esc_html__( 'Welcome Page', 'type' ); ?></strong></a>
+		</p>
+		<p>
+			<a class="button button-primary" href="<?php echo esc_url( 'https://www.designlabthemes.com/type-plus-wordpress-theme/?utm_source=WordPress&utm_medium=notice&utm_campaign=type_upsell' ); ?>" target="_blank">
+				<?php esc_html_e( 'View Type Plus', 'type' ); ?>
+			</a>
+			<a style="color: #646970;margin-left: 0.5em;" href="<?php echo esc_url( '?type-dismissed' ); ?>">
+				<?php esc_html_e( 'Dismiss', 'type' ); ?>
+			</a>
+		</p>
+	</div>
+	<?php
+	}
+}
+add_action( 'admin_notices', 'type_notice' );
+
+function type_notice_dismissed() {
+	$user_id = get_current_user_id();
+	if ( isset( $_GET['type-dismissed'] ) ) {
+		add_user_meta( $user_id, 'type_notice_dismissed', 'true', true );
+	}
+}
+add_action( 'admin_init', 'type_notice_dismissed' );

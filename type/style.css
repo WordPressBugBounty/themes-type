@@ -1,14 +1,14 @@
 /*
 Theme Name: Type
-Theme URI: https://www.designlabthemes.com/type-wordpress-theme/
+Text Domain: type
+Version: 1.1.7
+Requires at least: 5.0
+Tested up to: 6.8
+Requires PHP: 5.6
+Description: Build a professional blog, an online store or a magazine style website with Type WordPress Theme. We built Type with performance, usability, and SEO in mind. It’s fast, lightweight, and fully AMP-compatible. With Type your website will look amazing on all devices to provide a great user experience. It comes with several options to quickly customize your site: quickly upload your Logo, easily combine 4 Header Styles, create an impressive Header Image, showcase your Featured Posts, and more. The Theme includes also a basic support for WooCommerce plugin.
 Author: Design Lab
 Author URI: https://www.designlabthemes.com/
-Description: Build a professional blog, an online store or a magazine style website with Type WordPress Theme. We built Type with performance, usability, and SEO in mind. It’s fast, lightweight, and fully AMP-compatible. With Type your website will look amazing on all devices to provide a great user experience. It comes with several options to quickly customize your site: quickly upload your Logo, easily combine 4 Header Styles, create an impressive Header Image, showcase your Featured Posts, and more. The Theme includes also a basic support for WooCommerce plugin.
-Version: 1.1.6
-Requires at least: 4.7
-Tested up to: 6.4
-Requires PHP: 5.6
-Text Domain: type
+Theme URI: https://www.designlabthemes.com/type-wordpress-theme/
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Tags: blog, custom-background, custom-colors, custom-header, custom-menu, custom-logo, e-commerce, featured-images, flexible-header, footer-widgets, full-width-template, one-column, post-formats, right-sidebar, sticky-post, theme-options, translation-ready, two-columns
@@ -21,7 +21,6 @@ Tags: blog, custom-background, custom-colors, custom-header, custom-menu, custom
 ********************************************************************************************************/
 
 /*
-
 01: Reset
 02: Typography
 03: Elements
@@ -35,7 +34,7 @@ Tags: blog, custom-background, custom-colors, custom-header, custom-menu, custom
 11: Blocks
 12: Media
 13: Responsive
-
+14: Type Plus
 */
 
 /*
@@ -490,17 +489,10 @@ q {
 	outline: none;
 }
 
-hr {
-	border: 0;
-	height: 1px;
-	margin: 20px auto;
-	background-color: #eee;
-}
-
 ul,
 ol {
 	margin: 0 0 20px 20px;
-    padding: 0 0 0 20px;
+	padding: 0 0 0 20px;
 }
 
 ul {
@@ -899,8 +891,9 @@ figure {
 .social-menu a[href*="stumbleupon.com"]:hover { color: #eb4823; }
 .social-menu a[href*="tumblr.com"]:hover { color: #32506d; }
 .social-menu a[href*="twitter.com"]:hover { color: #00aced; }
-.social-menu a[href*="youtube.com"]:hover { color: #bb0000; }
 .social-menu a[href*="vimeo.com"]:hover { color: #51b5e7; }
+.social-menu a[href*="x.com"]:hover { color: #000000; }
+.social-menu a[href*="youtube.com"]:hover { color: #bb0000; }
 
 .has-header-image .header-image .social-links {
 	display: block;
@@ -913,17 +906,13 @@ figure {
 	height: 30px;
 	line-height: 30px;
 	background-color: rgba(0,0,0, .3);
-	border-radius: 64px;
+	border-radius: 50%;
 	color: #fff;
 }
 
 .has-header-image .header-image .social-menu a:hover {
 	color: #fff;
 	background-color: rgba(0,0,0, .8);
-}
-
-.has-header-image .header-image .social-menu a:before {
-	vertical-align: -10%;
 }
 
 .mobile-navigation .mobile-social-menu {
@@ -2810,42 +2799,9 @@ p.has-drop-cap:not(:focus)::first-letter {
 	box-sizing: border-box;
 }
 
-/* Image */
-.wp-block-image {
-	margin-bottom: 20px;
-}
-
-.wp-block-image img {
-	display: block;
-}
-
-.wp-block-image .alignleft,
-.wp-block-image .alignright {
-	max-width: 100%;
-	margin: 0 auto 20px;
-	float: none;
-}
-
-.wp-block-image .aligncenter {
-	clear: both;
-	margin: 20px auto;
-}
-
-/* Cover */
-.wp-block-cover-image,
-.wp-block-cover {
-	margin: 20px auto;
-}
-
-/* Gallery */
-.wp-block-gallery {
-	margin-left: 0;
-}
-
 /* Quote */
 .wp-block-quote.is-style-large,
 .wp-block-quote.is-large {
-	margin: 20px 30px;
 	padding: 0 20px;
 }
 
@@ -2857,7 +2813,6 @@ p.has-drop-cap:not(:focus)::first-letter {
 
 /* Pullquote */
 .wp-block-pullquote {
-	margin: 20px 0;
 	padding: 0;
 	border: 0;
 }
@@ -2898,63 +2853,6 @@ pre.wp-block-verse {
 	padding: 0;
 	background-color: transparent;
 	white-space: pre-wrap
-}
-
-/* Buttons */
-.wp-block-button {
-	margin-bottom: 20px;
-}
-
-.wp-block-button__link,
-.wp-block-file .wp-block-file__button {
-	padding: 5px 20px;
-	background: #222;
-	color: #fff;
-	border-radius: 128px;
-}
-
-.wp-block-button__link {
-	font-size: 18px;
-}
-
-.wp-block-file .wp-block-file__button {
-	font-size: 14px;
-}
-
-.wp-block-button.is-style-outline {
-	color: #222;
-}
-
-.wp-block-button.is-style-outline .wp-block-button__link {
-	background: none;
-	border-color: currentColor;
-}
-
-.wp-block-button.is-style-outline .wp-block-button__link:not(.has-text-color) {
-	color: inherit;
-}
-
-/* Media & Text */
-.wp-block-media-text {
-	margin: 40px 0;
-}
-
-.wp-block-media-text *:last-child {
-	margin-bottom: 0;
-}
-
-/* Separator */
-.wp-block-separator {
-	margin: 40px auto;
-}
-.wp-block-separator,
-.wp-block-separator.is-style-wide {
-	border: 0;
-}
-
-.wp-block-separator:not(.is-style-wide):not(.is-style-dots) {
-	height: 4px;
-	max-width: 100px;
 }
 
 /* Archives, Categories & Latest Posts */
@@ -3070,25 +2968,7 @@ object {
 	padding: 0;
 }
 
-/* Alignments */
-
-.alignleft,
-.alignright {
-	margin: 0 auto 20px;
-}
-
-.aligncenter {
-	clear: both;
-	margin: 20px auto;
-}
-
-img.aligncenter,
-.aligncenter img {
-	display: block;
-}
-
-/* Galleries */
-
+/* Gallery legacy */
 .gallery {
 	margin: 0 -10px 20px;
 }
@@ -3175,19 +3055,6 @@ img.aligncenter,
 /*
  * 13: Responsive
  */
-
-@media screen and (min-width: 480px) {
-	.alignleft,
-	.wp-block-image .alignleft {
-	float: left;
-	margin: 0 30px 10px 0;
-	}
-	.alignright,
-	.wp-block-image .alignright {
-	float: right;
-	margin: 0 0 10px 30px;
-	}
-}
 
 @media screen and (min-width: 600px) {
 	/* Grid */

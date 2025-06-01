@@ -1,7 +1,7 @@
 === Type ===
 Tags: blog, custom-background, custom-colors, custom-header, custom-menu, custom-logo, e-commerce, featured-images, footer-widgets, full-width-template, one-column, post-formats, right-sidebar, sticky-post, theme-options, translation-ready, two-columns
-Requires at least: 4.7
-Tested up to: 6.4
+Requires at least: 5.0
+Tested up to: 6.8
 Requires PHP: 5.6
 Stable tag: 1.1.2
 License: GPLv3 or later
@@ -31,6 +31,12 @@ Please visit https://wordpress.org/support/theme/type/ if you have any questions
 
 
 == Changelog ==
+
+= 1.1.7 =
+* Update About Page to fix the incorrect call to the _load_textdomain_just_in_time function
+* Update Theme Notice
+* Add theme.json file for better Block Editor support
+* Load Translations at the init action
 
 = 1.1.6 =
 * Update Social Icons
